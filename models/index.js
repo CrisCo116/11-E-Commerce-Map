@@ -1,10 +1,10 @@
-// imort models
+// Import models
 const Product = require('./Product');
 const Category = require('./Category');
 const Tag = require('./Tag');
 const ProductTag = require('./ProductTag');
 
-// Products belongsTo Category
+// Products belong to Category
 Product.belongsTo(Category, {
   foreignKey: 'category_id',
 });
@@ -15,21 +15,22 @@ Category.hasMany(Product, {
   onDelete: 'CASCADE',
 });
 
-// Products belongToMany Tags (through ProductTag)
+// Products belong to many Tags (through ProductTag)
 Product.belongsToMany(Tag, {
   through: ProductTag,
   foreignKey: 'product_id',
 });
 
-// Tags belongToMany Products (through ProductTag)
+// Tags belong to many Products (through ProductTag)
 Tag.belongsToMany(Product, {
   through: ProductTag,
   foreignKey: 'tag_id',
 });
 
+// Include the association table in the exports
 module.exports = {
   Product,
   Category,
   Tag,
-  ProductTag,
+  ProductTag, // Include the association table in the exports
 };
